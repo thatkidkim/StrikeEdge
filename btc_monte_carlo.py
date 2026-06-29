@@ -1,3 +1,4 @@
+
 """
 BTC Monte Carlo — Kalshi Hourly Price Market Edge Finder
 =========================================================
@@ -127,6 +128,7 @@ def _fetch_coinbase(lookback_days: int) -> list[dict]:
         "granularity": "ONE_HOUR",
         "limit":       min(lookback_days * 24 + 2, 350),
     }
+
     r = requests.get(url, params=params,
                      headers={"Content-Type": "application/json"}, timeout=10)
     r.raise_for_status()
@@ -140,8 +142,10 @@ def _fetch_coinbase(lookback_days: int) -> list[dict]:
             "low":   float(k["low"]),   "close": float(k["close"]),
             "vol":   float(k["volume"]),
         }
+
         for k in raw
     ]
+
     candles.sort(key=lambda c: c["time"])
     return candles
 
@@ -163,8 +167,10 @@ def _fetch_kraken(lookback_days: int) -> list[dict]:
             "low":   float(k[3]), "close": float(k[4]),
             "vol":   float(k[6]),
         }
+
         for k in data["result"][pair_key]
     ]
+
     candles.sort(key=lambda c: c["time"])
     return candles
 
@@ -583,6 +589,7 @@ def plot_dashboard(candles: list[dict], settlement: np.ndarray,
         f"|  Std ${stats['std']:,.0f} vs theory ${sanity['theory_std']:,.0f}",
         color=title_color, fontsize=9, pad=6
     )
+    
     ax_dist.xaxis.set_major_formatter(
         plt.FuncFormatter(lambda x, _: f"${x:,.0f}"))
     ax_dist.legend(fontsize=7.5, facecolor=bg, labelcolor="white", framealpha=0.4)
