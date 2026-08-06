@@ -1,0 +1,6 @@
+# Python dependencies for StrikeEdge as of July 5th, 2026
+
+numpy>=2.0
+matplotlib>=3.8
+requests>=2.31
+pytz>=2024.1
