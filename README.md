@@ -1,3 +1,4 @@
+
 # StrikeEdge — Kalshi Hourly Price Market Edge Finder
 
 A quantitative Monte Carlo engine for estimating the fair probabilities of **Kalshi BTC Hourly Price Markets** using stochastic volatility, jump 
@@ -7,6 +8,8 @@ The model simulates thousands of possible BTC price paths from the current time 
 Benchmarks BRTI settlement methodology**, and identifies potential pricing discrepancies between the model and the market.
 
 ---
+
+![StrikeEdge Dashboard](examples/btc_monte_carlo_output.png)
 
 ## Features
 
@@ -24,33 +27,6 @@ Benchmarks BRTI settlement methodology**, and identifies potential pricing discr
 
 ---
 
-## Example Dashboard
-
-The dashboard displays:
-
-- Recent BTC price history
-- Simulated settlement distribution
-- Strike probability ladder
-- Model summary
-- OVER/UNDER edge analysis
-
-Example:
-
-```
-P(OVER @ $64,000): 61.0%
-P(UNDER @ $64,000): 39.0%
-
-Market OVER : 89¢
-Market UNDER: 12¢
-
-Edge OVER : -28%
-Edge UNDER: +27%
-
-Decision:
-BUY UNDER
-```
-
----
 
 ## Model
 
