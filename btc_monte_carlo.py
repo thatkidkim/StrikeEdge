@@ -72,9 +72,9 @@ VOL_SCALE_BEAR    = 1.10    # Fear premium in bear regime
 VOL_SCALE_NEUTRAL = 1.00    # No adjustment in neutral
 
 # Jump diffusion (Merton — independent sampling)
-LAMBDA_JUMPS      = 2.0     # Expected jumps per day
+LAMBDA_JUMPS      = 0.5    # was 2.0  (fewer jumps per day)
 JUMP_MEAN         = 0.0     # Mean jump log-size
-JUMP_SIGMA        = 0.006   # Std dev per jump (~0.6%)
+JUMP_SIGMA        = 0.003  # was 0.006 (smaller jump sizes)
 
 # Regime switching drift adjustment
 REGIME_DRIFT_ADJ  = 0.05    # Fraction of hourly vol added to drift per regime
@@ -714,9 +714,9 @@ def main():
     #
     #     Leave as None to skip that side / skip edge analysis.
     # ────────────────────────────────────────────────────
-    target_strike     = 59_250    # e.g. 64_000
-    market_prob_over  = 0.76    # e.g. 0.77
-    market_prob_under = 0.26    # e.g. 0.25
+    target_strike     = 64_000    # e.g. 64_000
+    market_prob_over  = 0.66    # e.g. 0.77
+    market_prob_under = 0.35    # e.g. 0.25
 
     # ── resolve expiry ──
     expiry_utc, minutes_left = parse_expiry(EXPIRY_HOUR_ET)
