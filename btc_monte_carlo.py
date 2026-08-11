@@ -33,6 +33,11 @@ Simulation approach (v4 — numerically stable):
 
 Requirements:
   pip install requests numpy matplotlib pytz
+  there is a requirements.txt file included for convenience.
+
+  also requires Python 3.9+ (for type hinting).
+  If you don't have matplotlib, you can still run the sim 
+  and print results, but no dashboard will be shown.
 
 Run:
   python btc_monte_carlo.py
