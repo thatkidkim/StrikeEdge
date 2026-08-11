@@ -719,9 +719,9 @@ def main():
     #
     #     Leave as None to skip that side / skip edge analysis.
     # ────────────────────────────────────────────────────
-    target_strike     = 64_000    # e.g. 64_000
-    market_prob_over  = 0.66    # e.g. 0.77
-    market_prob_under = 0.35    # e.g. 0.25
+    target_strike     = 63_750    # e.g. 64_000
+    market_prob_over  = 0.94    # e.g. 0.77
+    market_prob_under = 0.07    # e.g. 0.25
 
     # ── resolve expiry ──
     expiry_utc, minutes_left = parse_expiry(EXPIRY_HOUR_ET)

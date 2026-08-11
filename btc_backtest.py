@@ -484,19 +484,19 @@ def plot_results(results: dict[int, list[dict]],
     cal_rows  = (n_offsets + cols - 1) // cols
     total_rows = cal_rows + 1  # +1 for summary row
 
-    fig = plt.figure(figsize=(18, 5 * total_rows + 1), facecolor=bg)
+    fig = plt.figure(figsize=(18, 5.5 * total_rows + 2), facecolor=bg)
     fig.suptitle(
         f"BTC Monte Carlo — Phase 1 Off-the-Money Calibration  |  "
         f"{BACKTEST_DAYS}d window  |  {MINUTES_BEFORE}min before expiry  |  "
         f"{N_PATHS:,} paths/sim",
-        color="white", fontsize=13, fontweight="bold", y=0.99
+        color="white", fontsize=13, fontweight="bold", y=0.995
     )
 
     gs = gridspec.GridSpec(
         total_rows, cols, figure=fig,
-        hspace=0.55, wspace=0.35,
+        hspace=0.75, wspace=0.38,
         left=0.05, right=0.97,
-        top=0.95, bottom=0.05
+        top=0.93, bottom=0.05
     )
 
     # ── Per-offset calibration curves ──
@@ -539,7 +539,7 @@ def plot_results(results: dict[int, list[dict]],
         ax.set_title(
             f"Strike {sign}${abs(offset):,}  [{direction}]\n"
             f"ECE={m['ece']:.3f}  Skill={m['skill']*100:+.1f}%  n={m['n']}  {m['verdict']}",
-            color="white", fontsize=8.5, pad=4
+            color="white", fontsize=8, pad=8
         )
         ax.set_xlabel("Predicted P(YES)", color="#888", fontsize=7.5)
         ax.set_ylabel("Actual freq", color="#888", fontsize=7.5)
