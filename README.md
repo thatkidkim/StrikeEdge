@@ -1,11 +1,9 @@
 
-# StrikeEdge — Kalshi Hourly Price Market Edge Finder
+# StrikeEdge — Kalshi BTC Hourly Market Edge Finder
 
-A quantitative Monte Carlo engine for estimating the fair probabilities of **Kalshi BTC Hourly Price Markets** using stochastic volatility, jump 
-diffusion, and regime detection.
+A quantitative Monte Carlo engine for estimating fair probabilities on Kalshi BTC Hourly Price Markets using jump diffusion, vol-scaled GBM, and regime detection.
 
-The model simulates thousands of possible BTC price paths from the current time until a selected Kalshi hourly expiration, reproduces the **CF 
-Benchmarks BRTI settlement methodology**, and identifies potential pricing discrepancies between the model and the market.
+The model simulates thousands of BTC price paths from the current time to a selected Kalshi hourly expiry, reproduces the CF Benchmarks BRTI settlement methodology, and identifies pricing discrepancies between the model and the live market.
 
 ---
 
@@ -13,17 +11,18 @@ Benchmarks BRTI settlement methodology**, and identifies potential pricing discr
 
 ## Features
 
-- Live BTC/USD data from Coinbase (fallback to Kraken)
-- Automatic calibration using recent realized volatility
-- Heston stochastic volatility model
-- Merton jump diffusion
+- Live BTC/USD data from Coinbase Advanced API (Kraken fallback)
+- Realized volatility calibration from recent hourly candles
+- Vol-scaled Geometric Brownian Motion with regime adjustment
+- Merton jump diffusion for sudden market events
 - Bull / Bear / Neutral regime detection
-- Simulation from **current time → expiry**
-- BRTI settlement approximation using the average of the final 60 simulated second-by-second prices
-- Strike ladder probabilities
-- Edge detection for both **OVER** and **UNDER** contracts
-- Kelly Criterion bet sizing
-- Interactive dashboard visualization
+- Simulation from current time → expiry minute
+- BRTI settlement approximation (average of final 60 simulated second-by-second prices)
+- Full strike ladder with P(YES) probabilities
+- Edge detection for both OVER and UNDER contracts
+- Half-Kelly bet sizing
+- Sanity check: suppresses edge signals when simulated vol diverges from theory
+- Dashboard visualization with price history, settlement distribution, and strike ladder
 
 ---
 
@@ -46,13 +45,51 @@ dS=\mu Sdt+\sigma SdW
 
 Volatility is itself random and mean-reverting.
 
-\[
-dv=\kappa(\theta-v)dt+\xi\sqrt{v}dW
-\]
+Geometric Brownian Motion (Vol-Scaled)
 
-Captures volatility clustering frequently observed in cryptocurrency markets.
+Models the continuous movement of BTC prices. Volatility is scaled by regime:
 
----
+𝑑
+𝑆
+=
+𝜇
+𝑆
+ 
+𝑑
+𝑡
++
+𝜎
+eff
+𝑆
+ 
+𝑑
+𝑊
+dS=μSdt+σ
+eff
+	​
+
+SdW
+
+where 
+𝜎
+eff
+=
+𝜎
+realized
+×
+regime_scale
+σ
+eff
+	​
+
+=σ
+realized
+	​
+
+×regime_scale.
+
+Note: Heston stochastic volatility was evaluated and excluded. At the sub-hour step sizes used here, Heston produces numerical instability. Vol-scaled GBM with regime adjustment achieves equivalent practical effect.
+
 
 ### Merton Jump Diffusion
 
@@ -62,7 +99,7 @@ Models sudden market events such as:
 - CPI releases
 - FOMC meetings
 - Liquidations
-- Whale trades
+- Whale trades (Large block trades)
 
 Jump arrivals follow a Poisson process while jump sizes are normally distributed.
 
@@ -70,13 +107,14 @@ Jump arrivals follow a Poisson process while jump sizes are normally distributed
 
 ### Regime Detection
 
-Recent price action is classified as:
+Recent price action is classified into one of three regimes:
 
-- Bull
-- Neutral
-- Bear
+Regime	Condition	Vol Scale
+Bull	48h avg > prior 48h avg by >1%, positive drift	1.05×
+Bear	48h avg < prior 48h avg by >1%, negative drift	1.10×
+Neutral	Neither	1.00×
 
-The detected regime slightly adjusts the drift during simulation.
+The detected regime also applies a small drift adjustment during simulation.
 
 ---
 
@@ -107,6 +145,16 @@ P(Settlement >= Strike)
 for every strike.
 
 ---
+
+
+## Sanity Check
+
+After each simulation, the model compares its simulated standard deviation against the theoretical GBM prediction:
+
+ratio = sim_std / (S0 × σ × √T)
+
+If |ratio - 1| > 15%, edge signals are suppressed and the dashboard flags [⚠ vol inflated]. This prevents acting on a miscalibrated simulation.
+
 
 ## Edge Finder
 
@@ -149,6 +197,31 @@ Edge: +27%
 Kelly sizing is also reported for position sizing.
 
 ---
+
+
+## Phase 1 Backtesting
+
+//image to be inserted
+
+btc_backtest.py validates model calibration against 30 days of historical BTC closes — no Kalshi data required.
+
+For each past hourly expiry it:
+
+Computes vol and regime using only data available before that expiry (no lookahead)
+Runs the full Monte Carlo simulation
+Evaluates P(settlement >= strike) at 8 fixed offsets: ±$100, ±$200, ±$300, ±$500
+Checks what BTC actually did
+Calibration Results (30-day window, 553 simulations)
+Offset	ECE	Skill vs 50/50	Verdict
+±$500	0.008–0.011	+95–96%	✓ GOOD
+±$300	0.014–0.017	+81–82%	✓ GOOD
+±$200	0.005–0.028	+63%	✓ GOOD
+±$100	0.040–0.045	+30%	✓ GOOD
+
+Takeaway: The model is well-calibrated at strikes $200+ from spot. Focus on those levels for real edge signals. The ±$100 zone is weaker — only act there if the edge is large (>15%).
+
+ECE = Expected Calibration Error (0 = perfect). Skill = improvement over naive 50/50 baseline.
+
 
 ## Installation
 
