@@ -36,7 +36,7 @@ The model simulates thousands of BTC price paths from the current time to a sele
 
 Models the continuous movement of BTC prices. Volatility is scaled by the detected regime:
 
-$$dS = \mu S \, dt + \sigma_{\text{eff}} S \, dW$$
+$dS = \mu S \, dt + \sigma_{\text{eff}} S \, dW$
 
 where $\sigma_{\text{eff}} = \sigma_{\text{realized}} \times \text{regime\_scale}$.
 
