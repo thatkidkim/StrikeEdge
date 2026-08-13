@@ -5,7 +5,7 @@ A quantitative Monte Carlo engine for estimating fair probabilities on **Kalshi 
 
 The model simulates thousands of BTC price paths from the current time to a selected Kalshi hourly expiry, reproduces the **CF Benchmarks BRTI settlement methodology**, and identifies pricing discrepancies between the model and the live market. 
 
-(README.md last updated August 12th, 2026)
+(`README.md` last updated August 12th, 2026)
 
 ---
 
@@ -227,7 +227,7 @@ StrikeEdge/
 - Real BRTI data feed integration
 - Option-implied volatility calibration
 - GPU-accelerated simulation paths
-- Add a second mode to btc_monte_carlo.py for the Kalshi "BTC Price Range at X Time" markets
+- Add a second mode to `btc_monte_carlo.py` for the Kalshi "BTC Price Range at X Time" markets
 
 ---
 
