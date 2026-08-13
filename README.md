@@ -1,5 +1,4 @@
 
-```markdown
 # StrikeEdge — Kalshi BTC Hourly Market Edge Finder
 
 A quantitative Monte Carlo engine for estimating fair probabilities on **Kalshi BTC Hourly Price Markets** using jump diffusion, vol-scaled GBM, and regime detection.
