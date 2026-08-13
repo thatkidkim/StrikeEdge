@@ -227,6 +227,7 @@ StrikeEdge/
 - Real BRTI data feed integration
 - Option-implied volatility calibration
 - GPU-accelerated simulation paths
+- Add a second mode to btc_monte_carlo.py for the Kalshi "BTC Price Range at X Time" markets
 
 ---
 
