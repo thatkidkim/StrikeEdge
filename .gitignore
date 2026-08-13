@@ -19,6 +19,10 @@ Thumbs.db
 
 # Generated outputs (removed from root of repo -> examples folder)
 btc_monte_carlo_output.png
+btc_backtest_output.png
+
+# Auto-generated temp data that gets refreshed every hour
+btc_backtest_cache.json
 
 # Logs
 *.log
