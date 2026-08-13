@@ -17,7 +17,7 @@ env/
 .DS_Store
 Thumbs.db
 
-# Generated outputs (removed from root of repo -> examples folder)
+# Generated outputs (kept in examples/ folder only — ignore in root)
 btc_monte_carlo_output.png
 btc_backtest_output.png
 
