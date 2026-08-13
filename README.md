@@ -3,7 +3,9 @@
 
 A quantitative Monte Carlo engine for estimating fair probabilities on **Kalshi BTC Hourly Price Markets** using jump diffusion, vol-scaled GBM, and regime detection.
 
-The model simulates thousands of BTC price paths from the current time to a selected Kalshi hourly expiry, reproduces the **CF Benchmarks BRTI settlement methodology**, and identifies pricing discrepancies between the model and the live market. (README.md last updated August 12th, 2026)
+The model simulates thousands of BTC price paths from the current time to a selected Kalshi hourly expiry, reproduces the **CF Benchmarks BRTI settlement methodology**, and identifies pricing discrepancies between the model and the live market. 
+
+(README.md last updated August 12th, 2026)
 
 ---
 
