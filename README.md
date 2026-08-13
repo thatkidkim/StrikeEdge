@@ -36,9 +36,9 @@ The model simulates thousands of BTC price paths from the current time to a sele
 
 Models the continuous movement of BTC prices. Volatility is scaled by the detected regime:
 
-$dS = \mu S \, dt + \sigma_{\text{eff}} S \, dW$
+$dS = \mu S \, dt + \sigma_{eff} S \, dW$
 
-where $\sigma_{\text{eff}} = \sigma_{\text{realized}} \times \text{regime\_scale}$.
+where $\sigma_{eff} = \sigma_{realized} \times regime\\_scale$.
 
 > **Note:** Heston stochastic volatility was evaluated and excluded. At the sub-hour step sizes used here, Heston produces numerical instability. Vol-scaled GBM with regime adjustment achieves the equivalent practical effect.
 
