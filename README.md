@@ -9,7 +9,7 @@ The model simulates thousands of BTC price paths from the current time to a sele
 
 ---
 
-![StrikeEdge Dashboard](examples/btc_monte_carlo_output.png)
+![StrikeEdge Dashboard](examples/btc_monte_carlo_readme.png)
 
 ---
 
