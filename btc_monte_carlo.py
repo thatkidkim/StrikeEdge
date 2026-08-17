@@ -707,9 +707,9 @@ def main():
     #     Examples:
     #       EXPIRY_HOUR_ET = 7    →  next 7:00 AM  EDT/EST
     #       EXPIRY_HOUR_ET = 19   →  next 7:00 PM  EDT/EST
-    #       EXPIRY_HOUR_ET = 0    →  next midnight  EDT/EST
+    #       EXPIRY_HOUR_ET = 0    →  next midnight  EDT/EST (recorded as 12 AM EDT/EST)
     # ────────────────────────────────────────────────────
-    EXPIRY_HOUR_ET = 17          # ← change this
+    EXPIRY_HOUR_ET = 0          # ← change this
 
     # ────────────────────────────────────────────────────
     #  ② STRIKE & MARKET ODDS
@@ -722,9 +722,9 @@ def main():
     #
     #     Leave as None to skip that side / skip edge analysis.
     # ────────────────────────────────────────────────────
-    target_strike     = 63_750    # e.g. 64_000
-    market_prob_over  = 0.94    # e.g. 0.77
-    market_prob_under = 0.07    # e.g. 0.25
+    target_strike     = 63_300    # e.g. 64_000
+    market_prob_over  = 0.59    # e.g. 0.77
+    market_prob_under = 0.42    # e.g. 0.25
 
     # ── resolve expiry ──
     expiry_utc, minutes_left = parse_expiry(EXPIRY_HOUR_ET)

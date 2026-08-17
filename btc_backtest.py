@@ -87,7 +87,9 @@ SANITY_TOLERANCE    = 0.15
 N_BUCKETS           = 8        # Calibration curve buckets per offset
 USE_CACHE           = True
 CACHE_FILE          = "btc_backtest_cache.json"
-OUTPUT_FILE         = "btc_backtest_output.png"
+
+# Output file now saves to the examples/ folder
+OUTPUT_FILE         = "examples/btc_backtest_output.png"
 
 
 # ═══════════════════════════════════════════════════════
