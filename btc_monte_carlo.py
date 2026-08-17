@@ -95,6 +95,9 @@ STRIKE_RANGE      = 500     # Show strikes from spot-500 to spot+500
 # Sanity check: warn if sim std deviates from theory by more than this
 SANITY_TOLERANCE  = 0.15    # 15%
 
+# Output, saves to the examples/ folder
+OUTPUT_FILE       = "examples/btc_monte_carlo_output.png"
+
 
 # ═══════════════════════════════════════════════════════
 #  EXPIRY TIME HELPERS
@@ -684,9 +687,9 @@ def plot_dashboard(candles: list[dict], settlement: np.ndarray,
                        bar.get_y() + bar.get_height() / 2,
                        f"{p:.0f}%", color="white", va="center", fontsize=7.5)
 
-    plt.savefig("btc_monte_carlo_output.png", dpi=150,
+    plt.savefig(OUTPUT_FILE, dpi=150,
                 bbox_inches="tight", facecolor="#0f0f0f")
-    print("  Chart saved → btc_monte_carlo_output.png")
+    print(f"  Chart saved → {OUTPUT_FILE}")
     plt.show()
 
 
